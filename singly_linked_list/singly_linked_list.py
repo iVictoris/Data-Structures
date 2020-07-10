@@ -120,5 +120,40 @@ class LinkedList:
     def add_length(self, number):
         self.length += number
 
-    def __len__(self):
-        return self.length
+    def stack_pop(self):
+        """
+        Removes the newest item added to the list or position self.length
+        """
+
+        # if no items present
+        if self.length == 0:
+            pass
+        
+        node = self.head
+        while node:
+            print(f'current node: {node}')
+            print(f'next node: {node.get_next()}')
+            popped_node = self.tail
+            
+            if node.get_next() is None:
+                # this is where there's only 1 item
+                self.tail = None
+                self.head = None
+                self.add_length(-1)
+                return popped_node
+            else:
+                # when there's 2+ items
+                # we're on the first item and there is another item
+                # need to check if the second next item is present
+                if node.get_next().get_next() is None:
+                    # basically, we just check one extra ahead 
+                    # we remove the connection to the next 
+                    node.remove_next()
+
+                    self.tail = node
+                    self.add_length(-1)
+                    print(f'Popped node {popped_node}')
+                    return popped_node
+                node = node.get_next()
+
+

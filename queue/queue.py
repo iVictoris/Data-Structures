@@ -42,7 +42,7 @@ class Queue:
         self.storage = LinkedList()
     
     def __len__(self):
-        pass
+        return len(self.storage)
 
     def enqueue(self, value):
         pass

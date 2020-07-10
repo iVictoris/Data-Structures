@@ -236,7 +236,6 @@ class DoublyLinkedList:
         value = node.value
 
         while (node):
-            print(node.value)
             value = node.value if node.value > value else value
             node = node.next
         return value

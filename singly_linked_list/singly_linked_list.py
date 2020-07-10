@@ -38,7 +38,9 @@ class LinkedList:
     @head.setter
     def head(self, data=None):
         # honestly this is probably only for setting head initially
-        node = Node(data) if data else None
+        if data is None: 
+            pass
+        node = data
 
         # if self.__head:
         #     # there's a head already
@@ -52,7 +54,10 @@ class LinkedList:
 
     @tail.setter
     def tail(self, data=None):
-        node = Node(data) if data else data
+        if data is None:
+            pass
+
+        node =data
 
         if self.__tail is None:
             self.__tail = node
@@ -72,13 +77,14 @@ class LinkedList:
         Adds a new node to the tail or self.length + 1, sets a pointer from previous tail to next tail
         """
         # adds to tail
+        node = Node(data) if data else data
 
         # case 1: no data
         if self.tail is None and self.head is None:
-            self.head = data
+            self.head = node
 
         # case 2: data present / nodes exist
-        self.tail = data
+        self.tail = node
         self.add_length(1)
 
     def pop(self):
@@ -87,21 +93,26 @@ class LinkedList:
         """
         # case 1: no data
         # case 2: 1 item
-        # case 3: 2+ items
+        # case 3: 2 items
+        # case 3: 3+ items
         if self.tail is None and self.head is None:
-            return 'LinkedList is empty'
-
-        node = self.head
-
-        if self.tail == self.head:
-            self.tail = None
+            return None
+        
+        popped_node = self.head
+        self.add_length(-1)
+        if (self.tail and self.head) and (self.tail is self.head):
             self.head = None
-            self.add_length(-1)
-            return node
+            self.tail = None
+            return popped_node
+        
+        if self.head.get_next() is self.tail:
+            self.head = self.tail
+            return popped_node
 
         self.head = self.head.get_next()
-        self.add_length(-1)
-        return node
+        return popped_node
+
+        
 
     def traverse(self):
         node = self.head

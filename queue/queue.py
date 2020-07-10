@@ -31,6 +31,12 @@ people buy items in the front
 
 new in, old out
 """
+
+import sys
+sys.path.append('..')
+
+from singly_linked_list.singly_linked_list import LinkedList
+
 class Queue:
     def __init__(self):
         self.size = 0

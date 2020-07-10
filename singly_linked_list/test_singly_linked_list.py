@@ -33,21 +33,25 @@ class LinkedListTests(unittest.TestCase):
 
 
     def test_pop(self):
-        self.assertEqual(self.list.pop(), 'LinkedList is empty')
+        self.assertEqual(self.list.pop(), None)
         self.list.append(1)
         self.assertEqual(len(self.list), 1)
         self.assertEqual(self.list.pop(), 1)
         self.assertEqual(len(self.list), 0)
+        self.assertEqual(self.list.head, None)
+        self.assertEqual(self.list.tail, None) 
         self.list.append(2)
-        self.assertEqual(self.list.head.data, 2)
-        self.assertEqual(self.list.tail.data, 2)
+        self.assertEqual(self.list.head, 2)
+        self.assertEqual(self.list.tail, 2)
         self.list.append(3)
         self.list.append(4)
         self.list.append(5)
         self.assertEqual(len(self.list), 4)
         self.list.pop()
         self.assertEqual(self.list.head, 3)
-        self.assertEqual(self.list.tail.data, 5)
+        self.list.pop()
+        # self.assertEqual(self.list.head, 5)
+        # self.assertEqual(self.list.tail, 5)
 
     def test_traverse(self):
         # h -> None <- t

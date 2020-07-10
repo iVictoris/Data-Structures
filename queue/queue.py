@@ -45,7 +45,7 @@ class Queue:
         return len(self.storage)
 
     def enqueue(self, value):
-        pass
+        self.storage.append(value)
 
     def dequeue(self):
-        pass
+        return self.storage.pop()

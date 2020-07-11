@@ -58,24 +58,24 @@ class DoublyLinkedListTests(unittest.TestCase):
         self.assertEqual(self.dll.tail.value, 20)
         self.assertEqual(len(self.dll), 3)
 
-    def test_node_delete(self):
-        node_1 = ListNode(3)
-        node_2 = ListNode(4)
-        node_3 = ListNode(5)
+    # def test_node_delete(self):
+    #     node_1 = ListNode(3)
+    #     node_2 = ListNode(4)
+    #     node_3 = ListNode(5)
 
-        node_1.next = node_2
-        node_2.next = node_3
-        node_2.prev = node_1
-        node_3.prev = node_2
+    #     node_1.next = node_2
+    #     node_2.next = node_3
+    #     node_2.prev = node_1
+    #     node_3.prev = node_2
 
-        node_2.delete()
+    #     node_2.delete()
 
-        self.assertEqual(node_1.next, node_3)
-        self.assertEqual(node_3.prev, node_1)
+    #     self.assertEqual(node_1.next, node_3)
+    #     self.assertEqual(node_3.prev, node_1)
 
-    def test_node_insert_before(self):
-        self.node.insert_before(0)
-        self.assertEqual(self.node.prev.value, 0)
+    # def test_node_insert_before(self):
+    #     self.node.insert_before(0)
+    #     self.assertEqual(self.node.prev.value, 0)
 
     def test_list_add_to_head(self):
         self.assertEqual(self.dll.head.value, 1) # 1
@@ -85,43 +85,41 @@ class DoublyLinkedListTests(unittest.TestCase):
         self.assertEqual(self.dll.head.next.value, 1)
         self.assertEqual(len(self.dll), 2)
 
-    # def test_node_insert_after(self):
-    #     self.node.insert_after(2)
-    #     self.assertEqual(self.node.next.value, 2)
+    # # def test_node_insert_after(self):
+    # #     self.node.insert_after(2)
+    # #     self.assertEqual(self.node.next.value, 2)
 
     def test_list_move_to_end(self):
-        self.dll.add_to_head(40)  # head -> 40 ; 1 40
+        self.dll.add_to_head(40)  # head -> 40, 1
         self.assertEqual(self.dll.tail.value, 1)
         self.assertEqual(self.dll.head.value, 40)
 
-        self.dll.move_to_end(self.dll.head)  # 40 1
+        self.dll.move_to_end(self.dll.head)  # 1 40
         self.assertEqual(self.dll.tail.value, 40)
-        # self.assertEqual(self.dll.tail.prev.value, 1) # tail has no prev value
+        self.assertEqual(self.dll.head.value, 1)
+        self.assertEqual(self.dll.tail.prev.value, 1) # tail has no prev value
         self.assertEqual(len(self.dll), 2)
 
-        self.dll.add_to_tail(4)  # tail -> 4 40 1
-        self.dll.move_to_end(self.dll.head.next)  # nothing should happen
-        # # tail is currently 4 who tf wrote this test
-        # self.assertEqual(self.dll.tail.value, 40)
-        self.assertEqual(self.dll.tail.value, 4)
-        # self.assertEqual(self.dll.tail.prev.value, 4) # tail doesn't have a previous node
+        self.dll.add_to_tail(4)  # tail -> 1 40 4
+        self.dll.move_to_end(self.dll.head.next)  # 1 4 40
+        self.assertEqual(self.dll.tail.value, 40)
+        self.assertEqual(self.dll.tail.prev.value, 4) # tail doesn't have a previous node
         self.assertEqual(len(self.dll), 3)
 
     def test_list_move_to_front(self):
-        self.dll.add_to_tail(3)
+        self.dll.add_to_tail(3) # 1 3
         self.assertEqual(self.dll.head.value, 1)
         self.assertEqual(self.dll.tail.value, 3)
 
-        self.dll.move_to_front(self.dll.tail)
+        self.dll.move_to_front(self.dll.tail) # 3 1
         self.assertEqual(self.dll.head.value, 3)
-        self.assertEqual(self.dll.head.prev.value, 1)
+        self.assertEqual(self.dll.head.next.value, 1)
         self.assertEqual(len(self.dll), 2)
 
-        self.dll.add_to_head(29)  # 29 is head
-        self.dll.move_to_front(self.dll.head.next)  # passed
-        # self.assertEqual(self.dll.head.value, 3) # cannot equal 3 who the heck wrote this test
-        self.assertEqual(self.dll.head.value, 29)  # I wrote this
-        # self.assertEqual(self.dll.head.next.value, 29) # unfortunately head.next is None...
+        self.dll.add_to_head(29)  # 29 3 1
+        self.dll.move_to_front(self.dll.head.next) # 1 29 3
+        self.assertEqual(self.dll.head.value, 3) # cannot equal 3 who the heck wrote this test
+        self.assertEqual(self.dll.head.next.value, 29) # unfortunately head.next is None...
         self.assertEqual(len(self.dll), 3)
 
     def test_list_delete(self):
@@ -130,11 +128,11 @@ class DoublyLinkedListTests(unittest.TestCase):
         self.assertIsNone(self.dll.tail)
         self.assertEqual(len(self.dll), 0)
 
-        self.dll.add_to_tail(1)
-        self.dll.add_to_head(9)
-        self.dll.add_to_tail(6)  # 6 1 9
+        self.dll.add_to_tail(1) # 1
+        self.dll.add_to_head(9) # 9 1
+        self.dll.add_to_tail(6)  # 9 1 6
 
-        self.dll.delete(self.dll.head)  # 6 1
+        self.dll.delete(self.dll.head)  # 1 6
         self.assertEqual(self.dll.head.value, 1)
         self.assertEqual(self.dll.tail.value, 6)
         self.assertEqual(len(self.dll), 2)

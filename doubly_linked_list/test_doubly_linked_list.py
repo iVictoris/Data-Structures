@@ -48,13 +48,13 @@ class DoublyLinkedListTests(unittest.TestCase):
         self.assertEqual(self.dll.tail.value, 1)  # 1
         self.assertEqual(len(self.dll), 1)
 
-        self.dll.add_to_tail(30)  # 30 1
-        self.assertEqual(self.dll.tail.next.value, 1)
+        self.dll.add_to_tail(30)  # 1 30
+        self.assertEqual(self.dll.tail.prev.value, 1)
         self.assertEqual(self.dll.tail.value, 30)
         self.assertEqual(len(self.dll), 2)
 
-        self.dll.add_to_tail(20)
-        self.assertEqual(self.dll.tail.next.value, 30)
+        self.dll.add_to_tail(20) # 1 30 20
+        self.assertEqual(self.dll.tail.prev.value, 30)
         self.assertEqual(self.dll.tail.value, 20)
         self.assertEqual(len(self.dll), 3)
 
@@ -78,12 +78,11 @@ class DoublyLinkedListTests(unittest.TestCase):
         self.assertEqual(self.node.prev.value, 0)
 
     def test_list_add_to_head(self):
-        self.assertEqual(self.dll.head.value, 1)
+        self.assertEqual(self.dll.head.value, 1) # 1
 
-        self.dll.add_to_head(10)
+        self.dll.add_to_head(10) # 10 1
         self.assertEqual(self.dll.head.value, 10)
-        # had to change to previous due to logic error
-        self.assertEqual(self.dll.head.prev.value, 1)
+        self.assertEqual(self.dll.head.next.value, 1)
         self.assertEqual(len(self.dll), 2)
 
     # def test_node_insert_after(self):

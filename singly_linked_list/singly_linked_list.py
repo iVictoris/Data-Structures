@@ -142,8 +142,6 @@ class LinkedList:
         
         node = self.head
         while node:
-            print(f'current node: {node}')
-            print(f'next node: {node.get_next()}')
             popped_node = self.tail
             
             if node.get_next() is None:
@@ -163,7 +161,6 @@ class LinkedList:
 
                     self.tail = node
                     self.add_length(-1)
-                    print(f'Popped node {popped_node}')
                     return popped_node
                 node = node.get_next()
 
